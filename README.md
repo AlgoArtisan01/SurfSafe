@@ -46,6 +46,6 @@ Every time you browse, your device and browser silently expose data — some wit
 
 ## 🖼️ Screenshot
 
-Here's a glimpse of the app interface:
-
-![🕵️ SurfSafe Screenshot](screenshots/preview.png)
+<p align="center">
+  <img src="screenshots/preview.png" alt="SurfSafe Screenshot" width="700"/>
+</p>)
