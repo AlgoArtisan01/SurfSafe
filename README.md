@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-🔗 **Working Link**: [Try It Yourselfl](https://surfsafe.netlify.app/)
+🔗 **Working Link**:  [Try Herel](https://surfsafe.netlify.app/)
 
 <!-- Replace # with your hosted project link -->
 
