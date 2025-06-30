@@ -1,12 +1,12 @@
 # 🕵️ SurfSafe
 
-**🕵️ SurfSafe** is a modern, browser-based tool that scans your environment to reveal how much personal information your browser may be exposing. It provides an intuitive privacy report powered by real-time detection using native web APIs — all without needing any installations.
+**SurfSafe** is a modern, browser-based tool that scans your environment to reveal how much personal information your browser may be exposing. It provides an intuitive privacy report powered by real-time detection using native web APIs — all without needing any installations.
 
 ---
 
 ## 🚀 Live Demo
 
-🔗 **Working Link**: [Click here to try the tool](#)
+🔗 **Working Link**: [Try It Yourselfl](https://surfsafe.netlify.app/)
 
 <!-- Replace # with your hosted project link -->
 
