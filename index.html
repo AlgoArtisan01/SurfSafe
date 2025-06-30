@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🕵️ SurfSafe</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+      :root {
+        --bg-dark: linear-gradient(135deg, #1e293b, #0f172a);
+        --bg-light: linear-gradient(135deg, #e0f7fa, #d9f7e5);
+        --text-dark: #f1f5f9;
+        --text-light: #1e293b;
+        --card-dark: rgba(31, 41, 55, 0.9);
+        --card-light: rgba(255, 255, 255, 0.75);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-dark);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        color: var(--text-dark);
+        transition: background 0.5s ease, color 0.5s ease;
+      }
+
+      body.light {
+        background: var(--bg-light);
+        color: var(--text-light);
+      }
+
+      .ring-bg {
+        stroke: #334155;
+      }
+
+      .ring-fill {
+        stroke: #10b981;
+        stroke-dasharray: 251.2;
+        stroke-dashoffset: 251.2;
+        transition: stroke-dashoffset 1s ease-in-out;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .btn-glow {
+        background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        color: white;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .btn-glow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      }
+
+      .report-label {
+        font-weight: 600;
+        color: #5eead4;
+      }
+
+      .card-box {
+        background-color: var(--card-dark);
+      }
+
+      body.light .card-box {
+        background-color: var(--card-light);
+        backdrop-filter: blur(12px);
+      }
+
+      body.light .report-label {
+        color: #047857;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-6">
+    <button
+      id="themeToggle"
+      class="absolute top-4 right-4 text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1 rounded-lg shadow"
+    >
+      🌙 Dark
+    </button>
+
+    <div
+      id="reportCard"
+      class="w-full max-w-2xl p-8 rounded-3xl shadow-2xl text-center card-box"
+    >
+      <h1 class="text-4xl font-extrabold mb-6 text-emerald-300">
+        🕵️ SurfSafe
+      </h1>
+
+      <button
+        id="scanNow"
+        class="btn-glow py-3 px-6 rounded-xl text-lg font-semibold"
+      >
+        🚀 Start Your Scan
+      </button>
+      <br>
+      <div id="scanIcon" class="hidden text-xl mt-6 animate-pulse">
+        🔎 Scanning... 
+      </div>
+
+      <div class="my-6">
+        <svg width="120" height="120">
+          <circle
+            cx="60"
+            cy="60"
+            r="45"
+            stroke-width="10"
+            class="ring-bg fill-none"
+          />
+          <circle
+            id="privacyCircleFill"
+            cx="60"
+            cy="60"
+            r="45"
+            stroke-width="8"
+            class="ring-fill fill-none transform -rotate-90 origin-center"
+          />
+        </svg>
+      </div>
+
+      <div id="reportBlock" class="hidden mt-8 text-left space-y-3 text-base">
+        <p>
+          <span class="report-label">🕶️ Incognito Mode:</span>
+          <span id="incognito">-</span>
+        </p>
+        <p>
+          <span class="report-label">🔐 Fingerprint ID:</span>
+          <span id="fingerprint">-</span>
+        </p>
+        <p>
+          <span class="report-label">⚠️ Exposure Level:</span>
+          <span id="exposure">-</span>
+        </p>
+        <p>
+          <span class="report-label">💻 Device:</span>
+          <span id="device">-</span>
+        </p>
+        <p>
+          <span class="report-label">🌐 Browser:</span>
+          <span id="browser">-</span>
+        </p>
+        <p>
+          <span class="report-label">🔋 Battery:</span>
+          <span id="battery">-</span>
+        </p>
+        <p>
+          <span class="report-label">📡 IP Address:</span>
+          <span id="ip">-</span>
+        </p>
+        <p>
+          <span class="report-label">🗺️ Location:</span>
+          <span id="locationText">-</span>
+        </p>
+        <p>
+          <span class="report-label">📦 Resolution:</span>
+          <span id="resolution">-</span>
+        </p>
+        <p>
+          <span class="report-label">🈯 Language:</span>
+          <span id="language">-</span>
+        </p>
+        <p>
+          <span class="report-label">🕒 Timezone:</span>
+          <span id="timezone">-</span>
+        </p>
+        <p>
+          <span class="report-label">📷 Camera Permission:</span>
+          <span id="camera">-</span>
+        </p>
+        <p>
+          <span class="report-label">🎤 Microphone Permission:</span>
+          <span id="microphone">-</span>
+        </p>
+        <p>
+          <span class="report-label">📍 Location Permission:</span>
+          <span id="location">-</span>
+        </p>
+      </div>
+
+      <div class="mt-6 hidden space-y-4" id="rescanBlock">
+        <p class="text-2xl font-semibold">
+          🔎 Privacy Grade:
+          <span id="privacyGrade" class="font-bold text-green-400">-</span>
+        </p>
+        <button id="rescan" class="btn-glow py-2 px-5 rounded-lg font-semibold">
+          🔁 Rescan
+        </button>
+        <button
+          id="downloadBtn"
+          class="btn-glow bg-green-500 hover:bg-green-600 py-2 px-5 rounded-lg font-semibold"
+        >
+          📄 Save Report
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("themeToggle");
+      toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        toggleBtn.innerText = document.body.classList.contains("light")
+          ? "☀️ Light"
+          : "🌙 Dark";
+      });
+    </script>
+  </body>
+</html>
